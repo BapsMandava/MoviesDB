@@ -32,8 +32,6 @@ class MainActivity : AppCompatActivity() {
         setAdapter()
         fetchDataRepos()
         initState()
-       // observeList()
-        //fetchDataRepos()
     }
 
     private fun initialiseViewModel() {

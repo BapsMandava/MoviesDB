@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="customRatingElement">
+        <attr name="percentage" format="string"/>
+        <attr name="colorGradient" format="color"/>
+    </declare-styleable>
+</resources>
