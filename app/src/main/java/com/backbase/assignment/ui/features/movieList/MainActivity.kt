@@ -1,24 +1,17 @@
 package com.backbase.assignment.ui.features.movieList
 
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.backbase.assignment.R
 import com.backbase.assignment.ui.data.State
 import com.backbase.assignment.ui.features.movieList.adapters.MoviesListAdapter
 import com.backbase.assignment.ui.features.movieList.viewmodel.MovieListViewModel
 import com.backbase.assignment.ui.model.Results
-import com.google.gson.JsonArray
-import com.google.gson.JsonParser
 import kotlinx.android.synthetic.main.activity_main.*
-import java.net.URL
 
 
 class MainActivity : AppCompatActivity() {
@@ -37,6 +30,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         initialiseViewModel()
         setAdapter()
+        fetchDataRepos()
         initState()
        // observeList()
         //fetchDataRepos()
@@ -47,7 +41,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setAdapter() {
-        moviesAdapter = MoviesListAdapter { dataListViewModel.retry() }
+        moviesAdapter = MoviesListAdapter(this) { dataListViewModel.retry() }
         recycler_view.adapter = moviesAdapter
         dataListViewModel.getMovieListResults().observe(this,
             Observer {
@@ -55,20 +49,17 @@ class MainActivity : AppCompatActivity() {
             })
 
     }
-
-
-
     /**
      * observer to check live data changes
      */
-   /* private fun observeList() {
+    private fun observeList() {
         dataListViewModel?.movieNowPlaylingList.observe(this, Observer {
             it?.let { result ->
                 moviesAdapter.clear()
-                moviesAdapter.setRepos(result)
+                moviesAdapter.setNowPlayingData(result)
             }
         })
-    }*/
+    }
 
     private fun initState() {
         txt_error.setOnClickListener { dataListViewModel.retry() }
@@ -85,6 +76,7 @@ class MainActivity : AppCompatActivity() {
        // if(hasNetwork()) {
           //  showProgressBar(true)
            dataListViewModel.fetchMovieList()
+            observeList()
        // dataListViewModel.fetchPopularMovieList()
        /* }else{
             showNetworkMessage(hasNetwork())

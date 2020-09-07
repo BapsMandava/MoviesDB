@@ -31,6 +31,8 @@ class AppServiceRepo(private val context: Context){
             .build()
         movieList = LivePagedListBuilder(moviesDataSourceFactory, config).build()
     }
+
+
     /**
      * get movies list from the service
      * @param onSuccess success callback

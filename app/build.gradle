@@ -24,6 +24,7 @@ android {
 
 dependencies {
     def lifecycle_version = "2.1.0"
+    def glide_version = "4.10.0"
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -63,6 +64,13 @@ dependencies {
 
     // paging library
     implementation 'android.arch.paging:runtime:1.0.0'
+
+    // Glide
+    implementation "com.github.bumptech.glide:glide:$glide_version"
+    annotationProcessor "com.github.bumptech.glide:compiler:$glide_version"
+
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
 
 
 }

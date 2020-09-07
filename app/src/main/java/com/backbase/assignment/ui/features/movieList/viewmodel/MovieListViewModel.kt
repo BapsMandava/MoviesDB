@@ -39,14 +39,6 @@ class MovieListViewModel(application: Application) : AndroidViewModel(applicatio
             })
     }
 
-    fun fetchPopularMovieList() {
-        appServiceRepo.getPopularPlayingList("1",
-            onSuccess = { response ->
-                movieNowPlaylingList.postValue(response)
-            }, onError = {
-                error.postValue(it)
-            })
-    }
 
     fun getState(): LiveData<State> {
        return appServiceRepo.getState()

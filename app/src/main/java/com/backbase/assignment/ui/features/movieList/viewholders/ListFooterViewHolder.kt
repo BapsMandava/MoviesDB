@@ -1,4 +1,4 @@
-package com.backbase.assignment.ui.features.movieList.adapters
+package com.backbase.assignment.ui.features.movieList.viewholders
 
 import android.view.LayoutInflater
 import android.view.View
@@ -22,7 +22,9 @@ class ListFooterViewHolder(view: View) : RecyclerView.ViewHolder(view) {
             val view = LayoutInflater.from(parent.context)
                     .inflate(R.layout.item_list_footer, parent, false)
             view.txt_error.setOnClickListener { retry() }
-            return ListFooterViewHolder(view)
+            return ListFooterViewHolder(
+                view
+            )
         }
     }
 }
