@@ -9,4 +9,5 @@
     <color name="item_bg">#212121</color>
     <color name="lime_green">#00FF00</color>
     <color name="yellow">#ffea00</color>
+    <color name="white">#FFFFFF</color>
 </resources>

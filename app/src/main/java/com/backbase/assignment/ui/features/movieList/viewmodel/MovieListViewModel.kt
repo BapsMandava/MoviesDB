@@ -14,10 +14,6 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 
 class MovieListViewModel(application: Application) : AndroidViewModel(application) {
-    private val serviceAPI: Api = Api()
-
-    // initialise disposable object to dump api calls
-    private val disposable: CompositeDisposable = CompositeDisposable()
     val movieNowPlaylingList: MutableLiveData<List<Results>?> = MutableLiveData()
     val error: MutableLiveData<String?> = MutableLiveData()
     private val  appServiceRepo: AppServiceRepo

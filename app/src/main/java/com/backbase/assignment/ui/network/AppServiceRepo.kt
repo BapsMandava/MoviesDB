@@ -8,6 +8,7 @@ import androidx.paging.PagedList
 import com.backbase.assignment.ui.data.MovieDataSource
 import com.backbase.assignment.ui.data.MoviesDataSourceFactory
 import com.backbase.assignment.ui.data.State
+import com.backbase.assignment.ui.model.MoviesDetailsResult
 import com.backbase.assignment.ui.model.Results
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -48,6 +49,22 @@ class AppServiceRepo(private val context: Context){
                 { playingList -> onSuccess.invoke(playingList.results)
                 },
                 { error -> onError.invoke(error.toString())
+                }
+            )?.let { disposable.add(it) }
+    }
+
+    fun getMovieDetails(movieId:Int?,
+        onSuccess: (MoviesDetailsResult?) -> Unit,
+        onError: (String) -> Unit){
+        serviceAPI.getServiceinterface()?.fetchMovieDetails(movieId)
+            ?.subscribeOn(Schedulers.io())
+            ?.observeOn(AndroidSchedulers.mainThread())
+            ?.subscribe(
+                {
+                        movieDetails -> onSuccess.invoke(movieDetails)
+                },
+                {
+                        error -> onError.invoke(error.toString())
                 }
             )?.let { disposable.add(it) }
     }
