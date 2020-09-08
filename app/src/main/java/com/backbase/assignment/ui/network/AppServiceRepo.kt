@@ -52,22 +52,6 @@ class AppServiceRepo(private val context: Context){
             )?.let { disposable.add(it) }
     }
 
-    fun getPopularPlayingList(pageNo:String,
-        onSuccess: (List<Results>?) -> Unit,
-        onError: (String) -> Unit){
-        disposable.add(serviceAPI.getServiceinterface()!!.fetchPopularPlayingList(pageNo = 1)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(
-                {
-                        playingList -> onSuccess.invoke(playingList.results)
-                },
-                {
-                        error -> onError.invoke(error.toString())
-                }
-            ))
-    }
-
     fun getState(): LiveData<State> = Transformations.switchMap(
         moviesDataSourceFactory.moviesDataSourceLiveData,
         MovieDataSource::state

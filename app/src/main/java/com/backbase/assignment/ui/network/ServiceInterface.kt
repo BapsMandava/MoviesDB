@@ -4,6 +4,7 @@ import com.backbase.assignment.ui.Constants
 import com.backbase.assignment.ui.model.MoviePlayingResult
 import io.reactivex.Observable
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 /**
@@ -27,6 +28,16 @@ interface ServiceInterface {
     @GET("popular?")
     fun fetchPopularPlayingList(
         @Query("language") language: String = Constants.language,
+        @Query("page") pageNo: Int,
+        @Query("api_key") apiKey: String = Constants.api_key
+    ): Observable<MoviePlayingResult>
+
+    /**
+     * get movies details
+     */
+    @GET("popular?")
+    fun fetchMovieDetails(
+        @Path("language") language: String = Constants.language,
         @Query("page") pageNo: Int,
         @Query("api_key") apiKey: String = Constants.api_key
     ): Observable<MoviePlayingResult>

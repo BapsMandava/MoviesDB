@@ -1,6 +1,8 @@
 package com.backbase.assignment.ui.features.movieList
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -8,6 +10,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.RecyclerView
 import com.backbase.assignment.R
 import com.backbase.assignment.ui.data.State
+import com.backbase.assignment.ui.features.movieDetails.MovieDetailsActivity
 import com.backbase.assignment.ui.features.movieList.adapters.MoviesListAdapter
 import com.backbase.assignment.ui.features.movieList.viewmodel.MovieListViewModel
 import com.backbase.assignment.ui.model.Results
@@ -16,14 +19,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    companion object {
-        val TAG = MainActivity::class.java.simpleName
-    }
-
     private lateinit var dataListViewModel: MovieListViewModel
     private lateinit var moviesAdapter: MoviesListAdapter
-    private lateinit var dataRepoList: ArrayList<Results>
-    lateinit var mLayoutManager: RecyclerView.LayoutManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +36,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setAdapter() {
-        moviesAdapter = MoviesListAdapter(this) { dataListViewModel.retry() }
+        moviesAdapter = MoviesListAdapter(this,{ dataListViewModel.retry() },{ item -> doClick(item) })
         recycler_view.adapter = moviesAdapter
         dataListViewModel.getMovieListResults().observe(this,
             Observer {
@@ -70,22 +67,19 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
+
     private fun  fetchDataRepos() {
-       // if(hasNetwork()) {
-          //  showProgressBar(true)
-           dataListViewModel.fetchMovieList()
-            observeList()
-       // dataListViewModel.fetchPopularMovieList()
-       /* }else{
-            showNetworkMessage(hasNetwork())
-        }*/
+        dataListViewModel.fetchMovieList()
+        observeList()
     }
 
     fun doClick(data:Bundle){
-       /* val intent = Intent(this, TitleDetailActivity::class.java).apply {
+        //Log.d("da",data.getInt("id").toString())
+        val intent = Intent(this, MovieDetailsActivity::class.java).apply {
             putExtra("data", data)
         }
-        startActivity(intent)*/
+        startActivity(intent)
     }
+
 
 }

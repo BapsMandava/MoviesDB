@@ -1,6 +1,7 @@
 package com.backbase.assignment.ui.features.movieList.adapters
 
 import android.content.Context
+import android.os.Bundle
 import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
@@ -13,7 +14,7 @@ import com.backbase.assignment.ui.features.movieList.viewholders.TitleViewHolder
 import com.backbase.assignment.ui.model.Results
 
 
-class MoviesListAdapter(context: Context, private val retry: () -> Unit)
+class MoviesListAdapter(context: Context, private val retry: () -> Unit,val movieDataOnClick : (Bundle) -> Unit)
     : PagedListAdapter<Results, RecyclerView.ViewHolder>(MoviesDiffCallback) {
 
     private val TITLE_NOW_PLAYING_VIEW_TYPE = 0
@@ -47,7 +48,7 @@ class MoviesListAdapter(context: Context, private val retry: () -> Unit)
         else if (getItemViewType(position) == TITLE_POPULAR_VIEW_TYPE)
             (holder as TitleViewHolder).bind("Most popular")
         else if (getItemViewType(position) == POPULAR_VIEW_TYPE)
-            (holder as MoviesViewHolder).bind(context = context,movieData = getItem(position))
+            (holder as MoviesViewHolder).bind(context = context,movieData = getItem(position-3),adapterOnClick = { item -> doClick(item) })
         else (holder as ListFooterViewHolder).bind(state)
     }
 
@@ -95,5 +96,9 @@ class MoviesListAdapter(context: Context, private val retry: () -> Unit)
     fun clear() {
         nowPlayingData = emptyList()
         notifyDataSetChanged()
+    }
+
+    fun doClick(data:Bundle){
+        movieDataOnClick(data)
     }
 }

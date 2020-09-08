@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
     android:layout_marginTop="4dp"
     android:background="@color/item_bg"
     android:layout_width="match_parent"
@@ -44,6 +45,7 @@
         app:layout_constraintTop_toBottomOf="@+id/title"
         tools:text="April 12, 2019" />
 
+
     <com.backbase.assignment.ui.custom.RatingView
         android:id="@+id/rating"
         android:layout_width="wrap_content"
@@ -52,4 +54,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
