@@ -37,15 +37,25 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/ivPoster"
             android:layout_centerHorizontal="true"
+            android:textStyle="bold"
             android:layout_margin="10dp"
             android:text="@{viewModel.title}" />
+
+            <TextView
+                android:id="@+id/txtDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/title"
+                android:layout_centerHorizontal="true"
+                app:getDate="@{viewModel.release_date}" />
 
             <TextView
                 android:id="@+id/txtOverview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/title"
+                android:layout_below="@+id/txtDate"
                 android:layout_alignParentLeft="true"
+                android:textStyle="bold"
                 android:layout_margin="10dp"
                 android:text="Overview" />
 
