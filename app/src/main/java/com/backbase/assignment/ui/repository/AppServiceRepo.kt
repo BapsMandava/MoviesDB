@@ -1,21 +1,26 @@
-package com.backbase.assignment.ui.network
+package com.backbase.assignment.ui.repository
 
 import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
+import com.backbase.assignment.ui.ServiceType
 import com.backbase.assignment.ui.data.MovieDataSource
 import com.backbase.assignment.ui.data.MoviesDataSourceFactory
 import com.backbase.assignment.ui.data.State
 import com.backbase.assignment.ui.model.MoviesDetailsResult
 import com.backbase.assignment.ui.model.Results
+import com.backbase.assignment.ui.network.Api
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
+import org.koin.core.KoinComponent
+import org.koin.core.inject
+import org.koin.core.parameter.parametersOf
 
-class AppServiceRepo(private val context: Context){
-    private val serviceAPI: Api = Api()
+class AppServiceRepo(serviceType: ServiceType): KoinComponent {
+    private val serviceAPI: Api by inject{ parametersOf(serviceType) }
 
     // initialise disposable object to dump api calls
     private val disposable: CompositeDisposable = CompositeDisposable()

@@ -12,12 +12,15 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import com.backbase.assignment.R
 import com.backbase.assignment.databinding.ActivityMovieDetailsBinding
+import com.backbase.assignment.ui.BaseActivity
 import com.backbase.assignment.ui.features.movieDetails.adapter.GenresListAdapter
 import com.backbase.assignment.ui.features.movieDetails.viewmodel.MovieDetailsViewModel
+import com.backbase.assignment.ui.features.movieList.viewmodel.MovieListViewModel
 import kotlinx.android.synthetic.main.activity_movie_details.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MovieDetailsActivity : AppCompatActivity() {
-    private lateinit var movieDetailsViewModel: MovieDetailsViewModel
+class MovieDetailsActivity : BaseActivity() {
+    private val movieDetailsViewModel by viewModel<MovieDetailsViewModel>()
     lateinit var binding: ActivityMovieDetailsBinding;
     private lateinit var genresAdapter: GenresListAdapter
     var id:Int=0;
@@ -29,15 +32,9 @@ class MovieDetailsActivity : AppCompatActivity() {
         binding.executePendingBindings()
         pbProgress.visibility= View.VISIBLE
         initAppBar()
-        initialiseViewModel()
         fetchMovieDetails()
         setAdapter()
 
-    }
-
-    private fun initialiseViewModel() {
-        movieDetailsViewModel =
-            ViewModelProviders.of(this).get(MovieDetailsViewModel(application)::class.java)
     }
 
     private fun initAppBar() {

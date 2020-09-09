@@ -16,3 +16,8 @@ object utils {
         }
     }
 }
+
+enum class ServiceType{
+    API,
+    MOCK
+}

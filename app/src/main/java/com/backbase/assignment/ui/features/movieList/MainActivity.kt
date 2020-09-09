@@ -7,23 +7,23 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.backbase.assignment.R
+import com.backbase.assignment.ui.BaseActivity
 import com.backbase.assignment.ui.data.State
 import com.backbase.assignment.ui.features.movieDetails.MovieDetailsActivity
 import com.backbase.assignment.ui.features.movieList.adapters.MoviesListAdapter
 import com.backbase.assignment.ui.features.movieList.viewmodel.MovieListViewModel
 import kotlinx.android.synthetic.main.activity_main.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
-class MainActivity : AppCompatActivity() {
-
-    private lateinit var dataListViewModel: MovieListViewModel
+class MainActivity : BaseActivity() {
+    private val dataListViewModel by viewModel<MovieListViewModel>()
     private lateinit var moviesAdapter: MoviesListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         initAppBar()
-        initialiseViewModel()
         setAdapter()
         fetchDataRepos()
         initState()
@@ -32,10 +32,6 @@ class MainActivity : AppCompatActivity() {
         val bgImage = resources.getDrawable(R.drawable.moviebox_toolbar)
         supportActionBar?.setBackgroundDrawable(bgImage)
         supportActionBar?.setDisplayShowTitleEnabled(false);
-    }
-
-    private fun initialiseViewModel() {
-        dataListViewModel = ViewModelProviders.of(this).get(MovieListViewModel(application)::class.java)
     }
 
     private fun setAdapter() {
@@ -56,8 +52,19 @@ class MainActivity : AppCompatActivity() {
                 moviesAdapter.clear()
                 moviesAdapter.setNowPlayingData(result)
             }
-        })
+        }) }
+
+
+    private fun  fetchDataRepos() {
+        if(hasNetwork()) {
+            initState()
+            dataListViewModel.fetchMovieList()
+            observeList()
+        }else {
+            showNetworkMessage(hasNetwork())
+        }
     }
+
 
     private fun initState() {
         txt_error.setOnClickListener { dataListViewModel.retry() }
@@ -71,17 +78,15 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    private fun  fetchDataRepos() {
-        dataListViewModel.fetchMovieList()
-        observeList()
-    }
-
     fun doClick(data:Bundle){
-        //Log.d("da",data.getInt("id").toString())
-        val intent = Intent(this, MovieDetailsActivity::class.java).apply {
-            putExtra("data", data)
+        if(hasNetwork()) {
+            val intent = Intent(this, MovieDetailsActivity::class.java).apply {
+                putExtra("data", data)
+            }
+            startActivity(intent)
+        } else {
+            showNetworkMessage(hasNetwork())
         }
-        startActivity(intent)
     }
 
 
