@@ -3,9 +3,21 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimary">@color/item_bg</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+
+        <style name="Theme.Transparent" parent="Theme.AppCompat.Light">
+            <item name="android:background">#4D000000</item> <!-- Or any transparency or color you need -->
+            <item name="android:windowNoTitle">true</item>
+            <item name="android:windowBackground">@android:color/transparent</item>
+            <item name="android:colorBackgroundCacheHint">@null</item>
+            <item name="android:windowActionBar">@null</item>
+            <item name="android:homeAsUpIndicator">@drawable/ic_baseline_arrow_back</item>
+            <item name="android:title">@null</item>
+            <item name="android:windowIsTranslucent">true</item>
+            <item name="android:windowAnimationStyle">@android:style/Animation</item>
+        </style>
 
 </resources>

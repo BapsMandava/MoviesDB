@@ -2,18 +2,15 @@ package com.backbase.assignment.ui.features.movieList
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.RecyclerView
 import com.backbase.assignment.R
 import com.backbase.assignment.ui.data.State
 import com.backbase.assignment.ui.features.movieDetails.MovieDetailsActivity
 import com.backbase.assignment.ui.features.movieList.adapters.MoviesListAdapter
 import com.backbase.assignment.ui.features.movieList.viewmodel.MovieListViewModel
-import com.backbase.assignment.ui.model.Results
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -25,10 +22,16 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        initAppBar()
         initialiseViewModel()
         setAdapter()
         fetchDataRepos()
         initState()
+    }
+    private fun initAppBar() {
+        val bgImage = resources.getDrawable(R.drawable.moviebox_toolbar)
+        supportActionBar?.setBackgroundDrawable(bgImage)
+        supportActionBar?.setDisplayShowTitleEnabled(false);
     }
 
     private fun initialiseViewModel() {

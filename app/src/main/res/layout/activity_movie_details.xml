@@ -15,16 +15,29 @@
         android:layout_height="match_parent"
         tools:context=".ui.features.movieDetails.MovieDetailsActivity">
 
+
+
         <RelativeLayout
-            android:padding="35dp"
+            android:padding="20dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent" >
 
+            <ProgressBar
+                android:id="@+id/pbProgress"
+                android:layout_centerInParent="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        <RelativeLayout
+            android:id="@+id/rlMovieDeatils"
+            android:padding="20dp"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/ivPoster"
-            android:layout_width="126dp"
-            android:layout_height="189dp"
+            android:layout_width="160dp"
+            android:layout_height="250dp"
             android:layout_centerHorizontal="true"
             android:src="@mipmap/ic_launcher"
             android:scaleType="fitXY"
@@ -36,26 +49,51 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/ivPoster"
+            android:textSize="16sp"
+            android:gravity="center"
             android:layout_centerHorizontal="true"
             android:textStyle="bold"
+            android:textColor="@color/textColor"
             android:layout_margin="10dp"
             android:text="@{viewModel.title}" />
+
+            <LinearLayout
+                android:id="@+id/llDateTime"
+                android:layout_below="@+id/title"
+                android:layout_centerHorizontal="true"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/txtDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/title"
-                android:layout_centerHorizontal="true"
+                android:textSize="16sp"
+                android:textColor="@color/textColor"
                 app:getDate="@{viewModel.release_date}" />
+
+                <TextView
+                    android:id="@+id/txtRuntime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textColor="@color/textColor"
+                    android:layout_centerHorizontal="true"
+                    app:getTime="@{viewModel.runtime}" />
+
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/txtOverview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/txtDate"
+                android:layout_below="@+id/llDateTime"
                 android:layout_alignParentLeft="true"
                 android:textStyle="bold"
+                android:textSize="16sp"
+                android:textColor="@color/textColor"
                 android:layout_margin="10dp"
                 android:text="Overview" />
 
@@ -65,6 +103,8 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/txtOverview"
                 android:layout_alignParentLeft="true"
+                android:textColor="@color/textColor"
+                android:textSize="16sp"
                 android:layout_margin="10dp"
                 android:text="@{viewModel.overview}" />
 
@@ -72,7 +112,9 @@
                 android:id="@+id/rvGenres"
                 android:layout_below="@+id/txtDetails"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                tools:listitem="@layout/genres_item"/>
+        </RelativeLayout>
 
         </RelativeLayout>
 

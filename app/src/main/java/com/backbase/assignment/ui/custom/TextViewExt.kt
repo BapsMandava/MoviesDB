@@ -2,11 +2,7 @@ package com.backbase.assignment.ui.custom
 
 
 import android.widget.TextView
-import androidx.appcompat.widget.AppCompatImageView
 import androidx.databinding.BindingAdapter
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
-import kotlinx.android.synthetic.main.now_playing_list_item.view.*
 import java.text.SimpleDateFormat
 
 /**
@@ -23,9 +19,16 @@ fun TextView.getDate(date: String?) {
     if(!date.isNullOrEmpty()) {
         val dateValue = SimpleDateFormat("yyyy-MM-dd").parse(date)
         val newF = SimpleDateFormat("MMM dd, YYYY")
-        newF.format(dateValue)
+        this.text = newF.format(dateValue)
     }
     else{
-         ""
+        this.text = ""
     }
+}
+
+@BindingAdapter("getTime")
+fun TextView.getTime(time: Int?) {
+    val hours: Int = time?.div(60) ?: 0
+    val minutes: Int = time?.rem(60) ?: 0
+    this.text=" - "+hours+"h"+" "+minutes+"m"
 }

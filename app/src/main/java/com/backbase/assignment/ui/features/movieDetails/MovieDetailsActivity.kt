@@ -1,19 +1,19 @@
 package com.backbase.assignment.ui.features.movieDetails
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.backbase.assignment.R
 import com.backbase.assignment.databinding.ActivityMovieDetailsBinding
 import com.backbase.assignment.ui.features.movieDetails.adapter.GenresListAdapter
 import com.backbase.assignment.ui.features.movieDetails.viewmodel.MovieDetailsViewModel
-import com.backbase.assignment.ui.features.movieList.adapters.MoviesListAdapter
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_movie_details.*
 
 class MovieDetailsActivity : AppCompatActivity() {
@@ -27,10 +27,12 @@ class MovieDetailsActivity : AppCompatActivity() {
         id = data.getInt("id")
         binding = DataBindingUtil.setContentView(this, R.layout.activity_movie_details)
         binding.executePendingBindings()
+        pbProgress.visibility= View.VISIBLE
+        initAppBar()
         initialiseViewModel()
         fetchMovieDetails()
         setAdapter()
-        initObservers()
+
     }
 
     private fun initialiseViewModel() {
@@ -39,7 +41,21 @@ class MovieDetailsActivity : AppCompatActivity() {
     }
 
     private fun initAppBar() {
-       // supportActionBar?.title = getString(R.string.ac)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+        supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        supportActionBar?.setDisplayShowTitleEnabled(false);
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                onBackPressed()
+                return true
+            }
+        }
+
+        return super.onOptionsItemSelected(item)
     }
 
     private fun setAdapter() {
@@ -56,6 +72,8 @@ class MovieDetailsActivity : AppCompatActivity() {
     private fun initObservers() {
         movieDetailsViewModel?.movieDetails.observe(this, Observer {
             it?.let { result ->
+                pbProgress.visibility = View.GONE
+                rlMovieDeatils.visibility = View.VISIBLE
                 binding.viewModel = result
                 genresAdapter.setRepos(result.genres)
             }
@@ -64,5 +82,6 @@ class MovieDetailsActivity : AppCompatActivity() {
 
     private fun fetchMovieDetails(){
         movieDetailsViewModel.fetchMovieDetails(id)
+        initObservers()
     }
 }
