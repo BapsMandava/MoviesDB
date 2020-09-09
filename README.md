@@ -2,12 +2,15 @@
 
 This application shows the list of Movies that are classified into two categories "Now Playing" and "Popular"
 
-"Now Playing" movie list section is just a carousel which uses recycler view with view holder pattern
+"Now Playing" movie list section is just a carousel which uses recycler view with view holder pattern.
+
 "Popular" section movie list is vertical oriented recycler view which support pagination/Lazy loading 
 	- Pagination is done with help of android "Paging" library provided by google.
 	- This helps to segregate the logic for pagination in a much simpler way.
+	
 "Images"
 	- For image loading glide library is used which also helps for caching the images for smoother scroll.
+	
 "Rating View"
 	- An xml with the all the required components are placed
 	- A progress bar is used to show the rating data on the bar
@@ -16,6 +19,7 @@ This application shows the list of Movies that are classified into two categorie
 	
 "Retrofit"
 	- A famous networking library is used to perform API calls which also helps to intercept the request and responses.
+	
 "Rx Java"
 	- Rx java is used for asynchronous data flow
 	
