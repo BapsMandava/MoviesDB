@@ -1,4 +1,4 @@
-package com.rahul.moviesearch.di
+package ccom.backbase.assignment.ui.di
 
 import com.backbase.assignment.ui.ServiceType
 import com.backbase.assignment.ui.features.movieDetails.viewmodel.MovieDetailsViewModel

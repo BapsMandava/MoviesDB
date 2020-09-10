@@ -11,8 +11,6 @@ import com.backbase.assignment.ui.model.Results
 class GenresListAdapter internal constructor(context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var genresItem = emptyList<Genres>()
-    private var context: Context = context
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):  RecyclerView.ViewHolder {
         return GenresViewHolder.create(parent)

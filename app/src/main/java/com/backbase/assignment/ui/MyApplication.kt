@@ -1,10 +1,11 @@
 package com.backbase.assignment.ui
 
 import android.app.Application
+import ccom.backbase.assignment.ui.di.appModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
-import com.rahul.moviesearch.di.appModule
+
 
 /**
  * Application context
