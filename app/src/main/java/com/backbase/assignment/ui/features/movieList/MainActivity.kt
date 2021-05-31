@@ -42,6 +42,7 @@ class MainActivity : BaseActivity() {
                 moviesAdapter.submitList(it)
             })
 
+
     }
     /**
      * observer to check live data changes

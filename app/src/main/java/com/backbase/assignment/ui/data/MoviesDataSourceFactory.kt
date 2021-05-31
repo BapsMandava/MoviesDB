@@ -9,8 +9,8 @@ import io.reactivex.disposables.CompositeDisposable
 
 class MoviesDataSourceFactory(
     private val compositeDisposable: CompositeDisposable,
-    private val networkService: ServiceInterface?)
-    : DataSource.Factory<Int, Results>() {
+    private val networkService: ServiceInterface?) :
+        DataSource.Factory<Int, Results>() {
 
     val moviesDataSourceLiveData = MutableLiveData<MovieDataSource>()
 

@@ -1,5 +1,3 @@
-# Android Assignment CS
-
 This application shows the list of Movies that are classified into two categories "Now Playing" and "Popular"
 
 "Now Playing" movie list section is just a carousel which uses recycler view with view holder pattern.
@@ -27,16 +25,3 @@ The whole app is implemented with MVVM architecture, live data is used to commun
 DataBinding is also used to show data in MovieDetails View.
 
 Extensions are used for TextView and ImageView to format the Date Time and Load image respectively.
-
-
-
-## Instructions
-
-You can find all the instrucrtions for the assingment on [Assingment Instructions](https://docs.google.com/document/d/1zCIIkybu5OkMOcsbuC106B92uqOb3L2PPo9DNFBjuWg/edit?usp=sharing).
-
-## Delivering the code
-* Fork this repo and select the access level as private **[Check how to do it here](https://confluence.atlassian.com/bitbucket/forking-a-repository-221449527.html)**
-* Go to settings and add the user **m-cs-recruitment@backbase.com** with the read access **[Check how to do it here](https://confluence.atlassian.com/bitbucket/grant-repository-access-to-users-and-groups-221449716.html)**
-* Send an e-mail to **m-cs-recruitment@backbase.com** with your info and repo once the development is done
-
-Please remember to work with small commits, it help us to see how you improve your code :)

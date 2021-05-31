@@ -16,10 +16,7 @@ import kotlinx.android.synthetic.main.now_playing_list.view.*
 class NowPlayingListViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     fun bind(context:Context,nowPlayingList:List<Results>) {
-        val adapter =
-            NowPlayingListAdapter(
-                context
-            )
+        val adapter = NowPlayingListAdapter(context)
         val linearLayoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
         itemView.rvNowPlaying.setLayoutManager(linearLayoutManager)
         itemView.rvNowPlaying.setItemAnimator(DefaultItemAnimator())
